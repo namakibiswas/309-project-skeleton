@@ -15,6 +15,7 @@
         <input type="number" id="quantity"/><br/>
         
         <button id="submit">Submit</button>
+        <div id="#error"></div></br></br>
         <script src="/lib/jquery/dist/jquery.min.js"></script>
         <script>
         var newProduct = {name:"", description:"", price:0, quantity:1};
@@ -31,7 +32,9 @@
                 }).done(function(response){
                     console.log(response);
                     window.location.replace('/product/' +response._id);
+                    
                 }).fail(function(response){
+                     $('#error').text(JSON.parse(response.responseText).message);
                     console.log(response.responseText);
                 });
             });
